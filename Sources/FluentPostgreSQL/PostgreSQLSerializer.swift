@@ -11,7 +11,7 @@ public final class PostgreSQLSerializer<E: Entity>: GeneralSQLSerializer<E> {
                 if primaryKey {
                     typeString = "SERIAL PRIMARY KEY"
                 } else {
-                    typeString = "INT(10) UNSIGNED"
+                    typeString = "INT UNSIGNED"
                 }
             case .uuid:
                 if primaryKey {
@@ -24,17 +24,17 @@ public final class PostgreSQLSerializer<E: Entity>: GeneralSQLSerializer<E> {
             }
             return typeString
         case .int:
-            return "INT(11)"
+            return "INT"
         case .string(let length):
             if let length = length {
-                return "VARCHAR(\(length))"
+                return "text"
             } else {
-                return "VARCHAR(255)"
+                return "text"
             }
         case .double:
             return "FLOAT"
         case .bool:
-            return "TINYINT(1) UNSIGNED"
+            return "TINYINT UNSIGNED"
         case .bytes:
             return "BYTEA"
         case .date:
